@@ -27,7 +27,10 @@ func main() {
 	})
 
 	r.POST("/users/create", handlers.CreateUser)
-	r.POST("/master/gameCheckpoint", handlers.GetMasterGameCheckpoint)
+	r.GET("/users/getUserData/:userId", handlers.GetUserData)
+	r.POST("/game/resetProgress", handlers.ResetGameProgress)
+	r.POST("/point-history/create", handlers.CreatePointHistory)
+	r.POST("/reward-history/create", handlers.CreateRewardHistory)
 
 	r.Run(":8080")
 }
