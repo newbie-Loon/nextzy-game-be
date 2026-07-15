@@ -29,3 +29,20 @@ CREATE INDEX idx_point_histories_user_id
 ON point_histories(user_id);
 CREATE INDEX idx_point_histories_earned_date
 ON point_histories(earned_date);
+ALTER TABLE public.point_histories ALTER COLUMN earned_date SET DEFAULT now();
+
+
+
+CREATE TABLE reward_histories (
+    id BIGSERIAL PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE,
+
+    user_id VARCHAR(255) NOT NULL,
+    reward VARCHAR(255) NOT NULL,
+    earned_date TIMESTAMP WITH TIME ZONE NOT NULL
+);
+CREATE INDEX idx_reward_histories_user_id
+ON reward_histories(user_id);
+CREATE INDEX idx_reward_histories_earned_date
+ON reward_histories(earned_date);
+ALTER TABLE public.reward_histories ALTER COLUMN earned_date SET DEFAULT now();
