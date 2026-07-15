@@ -6,10 +6,10 @@ import (
 	"gorm.io/gorm"
 )
 
-type PointHistory struct {
+type RewardHistory struct {
 	gorm.Model
 
 	UserID     string    `json:"userId"`
-	Point      int       `json:"point"`
+	Reward     string    `json:"reward"`
 	EarnedDate time.Time `json:"create_date"`
 }
