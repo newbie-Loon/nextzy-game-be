@@ -86,6 +86,5 @@ func CreatePointHistory(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"earnedPoint": request.Point,
 		"totalPoint":  finalPoint,
-		"message":     "point added successfully",
 	})
 }
