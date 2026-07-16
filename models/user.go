@@ -7,5 +7,4 @@ type User struct {
 
 	Guest  bool   `json:"guest"`
 	UserId string `json:"userId" gorm:"default:gen_random_uuid()"`
-	Point  int    `json:"point"`
 }

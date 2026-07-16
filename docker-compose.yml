@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+
+  backend:
+    build: .
+    container_name: nextzy-backend
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "3050:3050"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_NAME: nextzy_game
+      DB_SSLMODE: disable
+
+volumes:
+  postgres_data:

@@ -12,7 +12,7 @@ func main() {
 
 	config.ConnectDatabase()
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"https://yourdomain.com", "http://localhost:3000"}
+	config.AllowOrigins = []string{"http://localhost:3000"}
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 	config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
 	config.AllowCredentials = true
