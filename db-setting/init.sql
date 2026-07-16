@@ -1,49 +1,36 @@
-CREATE TABLE users (
-    id BIGSERIAL PRIMARY KEY,
-    created_at TIMESTAMP WITH TIME ZONE,
-    updated_at TIMESTAMP WITH TIME ZONE,
-    deleted_at TIMESTAMP WITH TIME ZONE,
-
-    guest BOOLEAN NOT NULL DEFAULT FALSE,
-    user_id VARCHAR(255) NOT NULL DEFAULT gen_random_uuid()
+CREATE TABLE public.point_histories (
+	id bigserial NOT NULL,
+	created_at timestamptz NULL,
+	user_id varchar(255) NOT NULL,
+	point int4 NOT NULL,
+	earned_date timestamptz DEFAULT now() NOT NULL,
+	deleted_at timestamptz NULL,
+	updated_at timestamptz NULL,
+	CONSTRAINT point_histories_pkey PRIMARY KEY (id)
 );
+CREATE INDEX idx_point_histories_earned_date ON public.point_histories USING btree (earned_date);
+CREATE INDEX idx_point_histories_user_id ON public.point_histories USING btree (user_id);
 
-CREATE INDEX idx_users_user_id ON users(user_id);
-
-ALTER TABLE users ALTER COLUMN user_id SET DEFAULT gen_random_uuid();
-
-
-CREATE TABLE point_histories (
-    id BIGSERIAL PRIMARY KEY,
-    created_at TIMESTAMP WITH TIME ZONE,
-    updated_at TIMESTAMP WITH TIME ZONE,
-    deleted_at TIMESTAMP WITH TIME ZONE,
-
-    user_id VARCHAR(255) NOT NULL,
-    point INTEGER NOT NULL,
-    earned_date TIMESTAMP WITH TIME ZONE NOT NULL
+CREATE TABLE public.reward_histories (
+	id bigserial NOT NULL,
+	created_at timestamptz NULL,
+	user_id varchar(255) NOT NULL,
+	reward varchar(255) NOT NULL,
+	earned_date timestamptz DEFAULT now() NOT NULL,
+	deleted_at timestamptz NULL,
+	updated_at timestamptz NULL,
+	CONSTRAINT reward_histories_pkey PRIMARY KEY (id)
 );
+CREATE INDEX idx_reward_histories_earned_date ON public.reward_histories USING btree (earned_date);
+CREATE INDEX idx_reward_histories_user_id ON public.reward_histories USING btree (user_id);
 
-CREATE INDEX idx_point_histories_user_id
-ON point_histories(user_id);
-CREATE INDEX idx_point_histories_earned_date
-ON point_histories(earned_date);
-ALTER TABLE public.point_histories ALTER COLUMN earned_date SET DEFAULT now();
-
-
-
-CREATE TABLE reward_histories (
-    id BIGSERIAL PRIMARY KEY,
-    created_at TIMESTAMP WITH TIME ZONE,
-    updated_at TIMESTAMP WITH TIME ZONE,
-    deleted_at TIMESTAMP WITH TIME ZONE,
-
-    user_id VARCHAR(255) NOT NULL,
-    reward VARCHAR(255) NOT NULL,
-    earned_date TIMESTAMP WITH TIME ZONE NOT NULL
+CREATE TABLE public.users (
+	id bigserial NOT NULL,
+	created_at timestamptz NULL,
+	updated_at timestamptz NULL,
+	deleted_at timestamptz NULL,
+	guest bool DEFAULT false NOT NULL,
+	user_id varchar(255) DEFAULT gen_random_uuid() NOT NULL,
+	CONSTRAINT users_pkey PRIMARY KEY (id)
 );
-CREATE INDEX idx_reward_histories_user_id
-ON reward_histories(user_id);
-CREATE INDEX idx_reward_histories_earned_date
-ON reward_histories(earned_date);
-ALTER TABLE public.reward_histories ALTER COLUMN earned_date SET DEFAULT now();
+CREATE INDEX idx_users_user_id ON public.users USING btree (user_id);
