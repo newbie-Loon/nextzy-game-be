@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"time"
 
 	"nextzy-game-be/config"
 	"nextzy-game-be/models"
@@ -79,8 +80,9 @@ func CreateRewardHistory(c *gin.Context) {
 	}
 
 	rewardHistory := models.RewardHistory{
-		UserID: request.UserId,
-		Reward: request.Reward,
+		UserID:     request.UserId,
+		Reward:     request.Reward,
+		EarnedDate: time.Now(),
 	}
 
 	if err := config.DB.

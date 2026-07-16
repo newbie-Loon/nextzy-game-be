@@ -5,8 +5,7 @@ CREATE TABLE users (
     deleted_at TIMESTAMP WITH TIME ZONE,
 
     guest BOOLEAN NOT NULL DEFAULT FALSE,
-    user_id VARCHAR(255) NOT NULL DEFAULT gen_random_uuid(),
-    point INTEGER NOT NULL DEFAULT 0
+    user_id VARCHAR(255) NOT NULL DEFAULT gen_random_uuid()
 );
 
 CREATE INDEX idx_users_user_id ON users(user_id);
@@ -36,6 +35,8 @@ ALTER TABLE public.point_histories ALTER COLUMN earned_date SET DEFAULT now();
 CREATE TABLE reward_histories (
     id BIGSERIAL PRIMARY KEY,
     created_at TIMESTAMP WITH TIME ZONE,
+    updated_at TIMESTAMP WITH TIME ZONE,
+    deleted_at TIMESTAMP WITH TIME ZONE,
 
     user_id VARCHAR(255) NOT NULL,
     reward VARCHAR(255) NOT NULL,

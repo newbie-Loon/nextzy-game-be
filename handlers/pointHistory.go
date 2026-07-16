@@ -64,10 +64,17 @@ func CreatePointHistory(c *gin.Context) {
 		})
 		return
 	}
+	tx.Commit()
 
 	var totalPoint int64
 
 	totalPoint, err := GetUserTotalPoint(request.UserId)
+	finalPoint := totalPoint
+	if finalPoint > 10000 {
+
+		finalPoint = 10000
+
+	}
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -78,7 +85,7 @@ func CreatePointHistory(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"earnedPoint": request.Point,
-		"totalPoint":  totalPoint,
+		"totalPoint":  finalPoint,
 		"message":     "point added successfully",
 	})
 }

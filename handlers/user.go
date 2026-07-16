@@ -119,11 +119,13 @@ type RewardStatus struct {
 }
 
 type PlayHistoryDto struct {
+	Id         int       `json:"id"`
 	Point      int       `json:"point"`
 	EarnedDate time.Time `json:"earnedDate"`
 }
 
 type RewardHistoryDto struct {
+	Id        int       `json:"id"`
 	Reward    string    `json:"reward"`
 	CreatedAt time.Time `json:"createdAt"`
 }
@@ -136,6 +138,7 @@ func convertPlayHistory(
 
 	for _, item := range items {
 		result = append(result, PlayHistoryDto{
+			Id:         int(item.ID),
 			Point:      item.Point,
 			EarnedDate: item.EarnedDate,
 		})
@@ -152,6 +155,7 @@ func convertRewardHistory(
 
 	for _, item := range items {
 		result = append(result, RewardHistoryDto{
+			Id:        int(item.ID),
 			Reward:    item.Reward,
 			CreatedAt: item.CreatedAt,
 		})
